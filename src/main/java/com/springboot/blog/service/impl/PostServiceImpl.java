@@ -7,6 +7,7 @@ import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -23,6 +24,8 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
+    private final ModelMapper mapper;
+
 
     @Override
     public PostDto createPost(PostDto postDto) {
@@ -31,7 +34,6 @@ public class PostServiceImpl implements PostService {
         Post post = mapToEntity(postDto);
 
         Post newPost = postRepository.save(post);
-
 
         //convert - Entity to PostDto
         PostDto postResponse = mapToDto(newPost);
@@ -104,25 +106,27 @@ public class PostServiceImpl implements PostService {
 
     //private method to Convert (Entity To Dto)
     private PostDto mapToDto(Post post){
-        PostDto postDto = new PostDto();
+        PostDto postDto = mapper.map(post, PostDto.class);
 
+     /* PostDto postDto = new PostDto();
         postDto.setId(post.getId());
         postDto.setTitle(post.getTitle());
         postDto.setDescription(post.getDescription());
         postDto.setContent(post.getContent());
-
+      */
         return postDto;
     }
 
     //private method to Convert (Dto to Entity)
     private Post mapToEntity (PostDto postDto){
-        Post post = new Post();
+        Post post = mapper.map(postDto, Post.class);
 
+    /*  Post post = new Post();
         post.setId(post.getId());
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
         post.setContent(postDto.getContent());
-
+    */
         return post;
 
     }

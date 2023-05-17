@@ -10,10 +10,13 @@ import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.CommentService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +27,9 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
     private final PostRepository postRepository;
+
+    private final ModelMapper mapper;
+
 
     @Override //Logic for (create/save) Comment
     public CommentDto createComment(long postId, CommentDto commentDto) {
@@ -118,8 +124,22 @@ public class CommentServiceImpl implements CommentService {
 
 
 
-    //private method to Convert (Entity To Dto)
-    private CommentDto mapToDto(Comment comment){
+    private CommentDto mapToDto(Comment comment) { //mapper using ModelMapper -Entity To Dto
+        CommentDto commentDto = mapper.map(comment, CommentDto.class);
+
+        return commentDto;
+    }
+
+    private Comment mapToEntity(CommentDto commentDto) { //mapper using ModelMapper -Dto To Entity
+        Comment comment = mapper.map(commentDto, Comment.class);
+
+        return comment;
+    }
+
+
+/*
+    //private method to Convert (Entity To Dto) --------------------------> In real scenarios is most util use Libraries like (ModelMapper or MapStruct)
+        CommentDto mapToDto(Comment comment){
         CommentDto commentDto = new CommentDto();
 
         commentDto.setId(comment.getId());
@@ -130,11 +150,11 @@ public class CommentServiceImpl implements CommentService {
         return commentDto;
     }
 
-    //private method to Convert (Dto to Entity)
-    private Comment mapToEntity (CommentDto commentDto){
+    //private method to Convert (Dto to Entity) --------------------------> In real scenarios is most util use Libraries like (ModelMapper or MapStruct)
+        private Comment mapToEntity (CommentDto commentDto){
         Comment comment = new Comment();
 
-        comment.setId(comment.getId());
+        comment.setId(commentDto.getId());
         comment.setName(commentDto.getName());
         comment.setEmail(commentDto.getEmail());
         comment.setBody(commentDto.getBody());
@@ -142,4 +162,6 @@ public class CommentServiceImpl implements CommentService {
         return comment;
 
     }
+
+ */
 }
