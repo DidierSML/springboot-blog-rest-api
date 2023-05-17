@@ -16,5 +16,4 @@ public interface CommentService {
 
     void deleteCommentById (Long postId, Long commentId);
 
-
 }
