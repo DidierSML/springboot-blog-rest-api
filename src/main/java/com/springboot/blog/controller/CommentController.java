@@ -1,8 +1,8 @@
 package com.springboot.blog.controller;
 
 import com.springboot.blog.dto.CommentDto;
-import com.springboot.blog.dto.PostDto;
 import com.springboot.blog.service.CommentService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,8 @@ public class CommentController {
     //create/save (Comment in Post) rest api
     @PostMapping("saveCommentInPost/{postId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public CommentDto createComment (@PathVariable (value = "postId") long postId, @RequestBody CommentDto commentDto){
+    public CommentDto createComment (@PathVariable (value = "postId") long postId,
+                                     @Valid @RequestBody CommentDto commentDto){
         return commentService.createComment(postId, commentDto);
     }
 
@@ -40,7 +41,9 @@ public class CommentController {
     //updateComment (postId, commentId, commentDto)
     @PutMapping("postId/{postId}/commentId/{commentId}")
     @ResponseStatus(HttpStatus.OK)
-    public CommentDto updateComment (@PathVariable(value = "postId") long postId, @PathVariable (value = "commentId") long commentId,@RequestBody CommentDto commentDto){
+    public CommentDto updateComment (@PathVariable(value = "postId") long postId,
+                                     @PathVariable (value = "commentId") long commentId,
+                                     @Valid @RequestBody CommentDto commentDto){
         return commentService.updateComment(postId,commentId,commentDto);
     }
 
