@@ -1,16 +1,16 @@
 package com.springboot.blog.controller;
 
 
-import com.springboot.blog.dto.PostDto;
-import com.springboot.blog.dto.PostResponse;
+import com.springboot.blog.dto.PostRequestDto;
+import com.springboot.blog.dto.PostGeneralResponse;
+import com.springboot.blog.dto.PostResponseDto;
 import com.springboot.blog.service.PostService;
 import com.springboot.blog.utils.AppConstants;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
@@ -22,14 +22,15 @@ public class PostController {
     //create blog post rest api
     @PostMapping("save")
     @ResponseStatus(HttpStatus.CREATED)
-    public PostDto createPost (@Valid @RequestBody PostDto postDto){
-        return postService.createPost(postDto);
+    public PostResponseDto createPost (@Valid @RequestBody PostRequestDto postRequestDto){
+
+        return postService.createPost(postRequestDto);
     }
 
-    //get all posts rest api
+    //get all posts rest api (PostGeneralResponse)
     @GetMapping("getAllPosts")
     @ResponseStatus(HttpStatus.OK)
-    public PostResponse getAllPosts (
+    public PostGeneralResponse getAllPosts (
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,       //Its start from 0
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,   //Each Page will contain 10 posts, you can change it in postman
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,  //Its allows sorting information by default in asc
@@ -41,22 +42,25 @@ public class PostController {
     //get post by Id
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PostDto findById (@PathVariable (value = "id") Long id){
+    public PostResponseDto findById (@PathVariable (value = "id") Long id){
+
         return postService.getPostById(id);
     }
 
     //update Post api
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PostDto updatePost (@Valid @RequestBody PostDto postDto, @PathVariable (name ="id") long id){
-        PostDto postResponse = postService.updatePost(postDto,id);
-        return postResponse;
+    public PostResponseDto updatePost (@Valid @RequestBody PostRequestDto postRequestDto,
+                                       @PathVariable (name ="id") long id){
+
+        return postService.updatePost(postRequestDto,id);
     }
 
     //delete Post api
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost (@PathVariable (name ="id") long id){
+
         postService.deletePostById(id);
     }
 

@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class PostDto {
+public class PostResponseDto {
 
     private long id;
 
@@ -23,6 +23,7 @@ public class PostDto {
     @Size(min = 2, message = "post title should have at least 2 characters")
     private String content;
 
-    private Set<CommentDto> comments; //Se usará una lista para retornar el post con sus comentarios
+    private Set<CommentResponseDto> comments; //Object in response to the Client
+
 
 }
