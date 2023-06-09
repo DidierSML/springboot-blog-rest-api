@@ -53,7 +53,7 @@ public class CommentServiceImpl implements CommentService {
         //retrieve comments by postId -invoking find method provided by JPA
         List<Comment> comments = commentRepository.findByPostId(postId);
 
-        //Conversion from comments to List of CommentsToResponseDto and Response of this last
+        //Conversion from List of Comments in CommentsToResponseDto and Response of (CommentsToResponseDto)
         return mapperComment.MAPPER_COMMENT.commentsToResponseDto(comments);
 
     }
