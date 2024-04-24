@@ -21,7 +21,7 @@ public class Comment {
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false) //We use it to specify the Foreign Key
+    @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
 }

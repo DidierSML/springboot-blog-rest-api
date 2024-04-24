@@ -7,7 +7,8 @@ import java.util.Date;
 
 @Getter
 @AllArgsConstructor
-public class ErrorDetails { //These elements will be used in order to send a response more simple respect to the errors
+public class ErrorDetails {
+    //These elements will be used in order to send a response more simple respect to the errors
 
     private Date timestamp;
     private String message;

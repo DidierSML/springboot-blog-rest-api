@@ -12,10 +12,3 @@ public class BlogAPIException extends RuntimeException {
     private HttpStatus status;
     private String message;
 }
-
-/*We used @AllArgumentsConstructor, the same form is possible generate
- Constructor just for -RunTimeException() y RunTimeException(message:String)
-
- Also, methods @Getter have been created using lombok establishing access to them.
-
- */

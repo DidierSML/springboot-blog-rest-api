@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/posts")
 public class PostController {
 
-    private final PostService postService; //Estamos usando la interfaz de Service
+    private final PostService postService;
 
     //create blog post rest api
     @PostMapping("save")
@@ -65,46 +65,3 @@ public class PostController {
     }
 
 }
-
-
-/*
-
-  1     //create blog post rest api
-
-        @PostMapping("save")
-        public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
-            return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
-        }
-
-
-  2     //Get All posts api - using ResponseEntity
-
-       @GetMapping("getAllPosts")
-            public List<PostDto> getAllPosts(){
-                return postService.getAllPosts();
-        }
-
-  3     //Get Post By Id api - using ResponseEntity
-
-       @GetMapping("/{id}")
-       public ResponseEntity <PostDto> getPostById (@PathVariable (name = "id") long id) {
-            return ResponseEntity.ok(postService.getPostById(id));
-       }
-
-  4      //Update Post api - using ResponseEntity
-
-        @PutMapping("{id}")
-        public ResponseEntity <PostDto> updatePost (@RequestBody PostDto postDto, @PathVariable (name ="id"), long id){
-            PostDto postResponse = postService.updatePost(postDto, id);
-            return new ResponseEntity<>(postResponse, HttpStatus.OK);
-        }
-
-  5      //delete Post api - using ResponseEntity
-
-        @DeleteMapping("{id})
-        public ResponseEntity <String> deletePost(@PathVariable (name = "id") long id){
-            postService.deletePostById(id);
-            return new ResponseEntity <> ("Post entity deleted successfully.", HttpStatus.Ok);
-        }
-
-     */
