@@ -105,3 +105,34 @@ public class PostServiceImpl implements PostService {
     }
 
 }
+
+ /*
+        //private method to Convert (Entity To Dto) ---Using Model Mapper
+        private PostRequestDto mapToDto(Post post){
+            PostRequestDto postDto = mapper.map(post, PostRequestDto.class);
+            PostDto postDto = new PostDto();
+            postDto.setId(post.getId());
+            postDto.setTitle(post.getTitle());
+            postDto.setDescription(post.getDescription());
+            postDto.setContent(post.getContent());
+            return postDto;
+        }
+        //private method to Convert (Dto to Entity) ---Using ModelMapper
+        private Post mapToEntity (PostRequestDto postDto){
+            Post post = mapper.map(postDto, Post.class);
+            Post post = new Post();
+            post.setId(post.getId());
+            post.setTitle(postDto.getTitle());
+            post.setDescription(postDto.getDescription());
+            post.setContent(postDto.getContent());
+            return post;
+        }
+        Anterior - Post(Entity) to PostDto- (With Out - ModelMapper)
+        PostDto postResponse = new PostDto();
+        postResponse.setId(newPost.getId());
+        postResponse.setTitle(newPost.getTitle());
+        postResponse.setDescription(newPost.getDescription());
+        postResponse.setContent(newPost.getContent());
+        return postResponse;
+    */
+

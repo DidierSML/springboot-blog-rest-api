@@ -127,3 +127,33 @@ public class CommentServiceImpl implements CommentService {
     }
 
 }
+
+
+/*
+    private CommentRequestDto mapToDto(Comment comment) { //mapper using ModelMapper -Entity To Dto
+        CommentRequestDto commentDto = mapper.map(comment, CommentRequestDto.class);
+        return commentDto;
+    }
+    private Comment mapToEntity(CommentRequestDto commentDto) { //mapper using ModelMapper -Dto To Entity
+        Comment comment = mapper.map(commentDto, Comment.class);
+        return comment;
+    }
+    //private method to Convert (Entity To Dto) --------------------------> In real scenarios is most util use Libraries like (ModelMapper or MapStruct)
+        CommentDto mapToDto(Comment comment){
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(comment.getId());
+        commentDto.setName(comment.getName());
+        commentDto.setEmail(comment.getEmail());
+        commentDto.setBody(comment.getBody());
+        return commentDto;
+    }
+    //private method to Convert (Dto to Entity) --------------------------> In real scenarios is most util use Libraries like (ModelMapper or MapStruct)
+        private Comment mapToEntity (CommentDto commentDto){
+        Comment comment = new Comment();
+        comment.setId(commentDto.getId());
+        comment.setName(commentDto.getName());
+        comment.setEmail(commentDto.getEmail());
+        comment.setBody(commentDto.getBody());
+        return comment;
+    }
+ */
