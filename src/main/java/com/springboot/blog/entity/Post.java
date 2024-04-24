@@ -6,8 +6,9 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+
+@Getter //Note 1
+@Setter //Note 1
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -30,6 +31,16 @@ public class Post {
     private String content;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    //This 'post' establish a connection with the 'post' present in 'Comments' class
     private Set<Comment> comments = new HashSet<>();
+    //Set does not allow duplicates for collections
 }
+
+/*
+  Note 1: -Model Mapper- internally uses toString() method to print the result are for mapping, and that generate a loop
+           of mappings post and postDto; in consequence, when you tried to consult the (posts methods), you cant see the
+           (comments) for each one [(getAllPosts) , (getPostById)].
+           The solution for it is change the @Data in the entity class (post) just for (@Getter & @Setter)
+
+*/
 

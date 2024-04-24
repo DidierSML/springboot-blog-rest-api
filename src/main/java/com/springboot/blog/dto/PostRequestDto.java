@@ -23,6 +23,7 @@ public class PostRequestDto {
     @Size(min = 2, message ="Post content should have at least 2 characters")
     private String content;
 
+    //Probar
     private Set<CommentRequestDto> comments;
 
 }
