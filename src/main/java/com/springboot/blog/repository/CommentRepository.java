@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository <Comment,Long> {
-    List<Comment> findByPostId (long postId); //In a List save all the <comments> relative for a specific Post(postId)
+    List<Comment> findByPostId (long postId);
+    //In a List -save- all the <comments> relative for a specific Post(postId)
 }

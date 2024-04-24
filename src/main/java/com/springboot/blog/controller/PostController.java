@@ -17,7 +17,8 @@ import javax.validation.Valid;
 @RequestMapping("/api/posts")
 public class PostController {
 
-    private final PostService postService; //Estamos usando la interfaz de Service
+    //InyDep
+    private final PostService postService;
 
     //create blog post rest api
     @PostMapping("save")

@@ -14,7 +14,7 @@ public class BlogAPIException extends RuntimeException {
 }
 
 /*We used @AllArgumentsConstructor, the same form is possible generate
- Constructor just for -RunTimeException() y RunTimeException(message:String)
+ Constructor just for -RunTimeException() & RunTimeException(message:String)
 
  Also, methods @Getter have been created using lombok establishing access to them.
 

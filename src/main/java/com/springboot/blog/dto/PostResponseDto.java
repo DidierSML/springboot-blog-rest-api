@@ -12,7 +12,8 @@ public class PostResponseDto {
     private String description;
     private String content;
 
-    private Set<CommentResponseDto> comments; //Object in response to the Client
+    private Set<CommentResponseDto> comments;
+    //Object in Response to the - > Client
 
 
 }
