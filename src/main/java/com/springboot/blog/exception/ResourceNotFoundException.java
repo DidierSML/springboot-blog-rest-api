@@ -1,10 +1,9 @@
 package com.springboot.blog.exception;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-//Esta @ le indica a (SB) que responda un (HttpStatus) específico cada vez que la (Exception) sea arrojada por el (Controller)
+//Esta @ le indica a (SB) que responda un (HttpStatus) específico cada vez que la (Exception) sea arrojada por él (Controller)
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
 
@@ -12,7 +11,7 @@ public class ResourceNotFoundException extends RuntimeException{
     private String fieldName;
     private long fieldValue;
 
-    //dinámicamente se reemplazarán los valores como en el ejemplo:
+    //Dinámicamente, se reemplazarán los valores como en el ejemplo:
     public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue) {
         super(String.format("%s not found with %s : '%s'",resourceName,fieldName,fieldValue)); // (Post) not found with (id):(1)
         this.resourceName = resourceName;
