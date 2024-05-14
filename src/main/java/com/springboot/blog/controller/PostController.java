@@ -17,10 +17,9 @@ import javax.validation.Valid;
 @RequestMapping("/api/posts")
 public class PostController {
 
-    //InyDep
     private final PostService postService;
 
-    //create blog post rest api
+    //Create/Save a Post in Blog
     @PostMapping("save")
     @ResponseStatus(HttpStatus.CREATED)
     public PostResponseDto createPost (@Valid @RequestBody PostRequestDto postRequestDto){
@@ -28,7 +27,7 @@ public class PostController {
         return postService.createPost(postRequestDto);
     }
 
-    //get all posts rest api (PostGeneralResponse)
+    //Get all posts (PostGeneralResponse)
     @GetMapping("getAllPosts")
     @ResponseStatus(HttpStatus.OK)
     public PostGeneralResponse getAllPosts (
@@ -40,7 +39,7 @@ public class PostController {
         return postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
     }
 
-    //get post by Id
+    //Get post By ID
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public PostResponseDto findById (@PathVariable (value = "id") Long id){
@@ -48,7 +47,7 @@ public class PostController {
         return postService.getPostById(id);
     }
 
-    //update Post api
+    //Update Post By ID
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public PostResponseDto updatePost (@Valid @RequestBody PostRequestDto postRequestDto,
@@ -57,7 +56,7 @@ public class PostController {
         return postService.updatePost(postRequestDto,id);
     }
 
-    //delete Post api
+    //Delete Post By ID
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost (@PathVariable (name ="id") long id){

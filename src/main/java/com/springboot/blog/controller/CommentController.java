@@ -17,7 +17,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    //create/save (Comment in Post) rest api
+    //Create/Save (Comment in Post)
     @PostMapping("saveCommentInPost/{postId}")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentResponseDto createComment (@PathVariable (value = "postId") long postId,
@@ -25,21 +25,21 @@ public class CommentController {
         return commentService.createComment(postId, commentRequestDto);
     }
 
-    //(get All comments for a particular Post)
+    //(get All comments By Post ID)
     @GetMapping("getAllCommentsBy/{postId}")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentResponseDto> getCommentsByPostId (@PathVariable (value ="postId") long postId){
         return commentService.getCommentsByPostId(postId);
     }
 
-    //get comment by post id (postId, commentId)
+    //Get comment by post id (postId, commentId)
     @GetMapping("postId/{postId}/commentId/{commentId}")
     @ResponseStatus(HttpStatus.OK)
     public CommentResponseDto getCommentById (@PathVariable (value = "postId") Long postId, @PathVariable (value = "commentId") Long commentId){
         return commentService.getCommentById(postId,commentId);
     }
 
-    //updateComment (postId, commentId, commentDto)
+    //UpdateComment (postId, commentId, commentDto)
     @PutMapping("postId/{postId}/commentId/{commentId}")
     @ResponseStatus(HttpStatus.OK)
     public CommentResponseDto updateComment (@PathVariable(value = "postId") long postId,
@@ -49,7 +49,7 @@ public class CommentController {
         return commentService.updateComment(postId,commentId,commentRequestDto);
     }
 
-    //deleteComment (postId, commentId)
+    //DeleteComment (postId, commentId)
     @DeleteMapping("postId/{postId}/commentId/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteComment (@PathVariable(value = "postId") long postId,
