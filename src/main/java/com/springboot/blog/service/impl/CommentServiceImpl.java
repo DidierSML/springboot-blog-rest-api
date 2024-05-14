@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final PostRepository postRepository;
 
-    private final MapperComment mapperComment;// mapstruct
+    private final MapperComment mapperComment;
 
 
     @Override //Logic for (create/save) Comment
@@ -58,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
 
     }
 
-    //Logic to get a Comment By Id
+    //Logic to get a Comment by id
     @Override
     public CommentResponseDto getCommentById(Long postId, Long commentId) {
 
@@ -81,10 +81,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentResponseDto updateComment(long postId, long commentId, CommentRequestDto commentRequestDto) {
 
-        //retrieve (post) Entity by id
+        //Retrieve (post) Entity by id
         Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post","id", postId));
 
-        //retrieve (comment) Entity by id
+        //Retrieve (comment) Entity by id
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("Comment","id",commentId));
 
         //Condition of searching -if comment(id) does not belong to post(id) throw ...

@@ -24,7 +24,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
-    private final MapperPost mapperPost; //using mapstruct
+    private final MapperPost mapperPost;
 
 
     @Override
@@ -52,7 +52,7 @@ public class PostServiceImpl implements PostService {
         Page <Post> posts = postRepository.findAll(pageable);
 
         // get content from page object
-        //List <Post> listOfPosts = posts.getContent();
+        // List <Post> listOfPosts = posts.getContent();
 
         //List<PostRequestDto> content = listOfPosts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
         List<PostResponseDto> content = mapperPost.postsToResponseDto(posts.getContent());
