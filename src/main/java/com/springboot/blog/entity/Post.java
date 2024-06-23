@@ -6,7 +6,6 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Getter //Note 1
 @Setter //Note 1
 @AllArgsConstructor
@@ -30,8 +29,8 @@ public class Post {
     @Column(name ="content", nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     //This 'post' establish a connection with the 'post' present in 'Comments' class
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
     //Set does not allow duplicates for collections
 }

@@ -33,8 +33,8 @@ public class PostController {
     public PostGeneralResponse getAllPosts (
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,       //Its start from 0
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,   //Each Page will contain 10 posts, you can change it in postman
-            @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,  //Its allows sorting information by default in asc
-            @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir  //Its allows sorting information in asc or desc
+            @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,  //Its allows sorting information by default in Asc order
+            @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir  //Its allows sorting information in Asc or Desc
     ){
         return postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
     }
@@ -84,7 +84,7 @@ public class PostController {
                 return postService.getAllPosts();
         }
 
-  3     //Get Post By Id api - using ResponseEntity
+  3     //Get Post By id - using ResponseEntity
 
        @GetMapping("/{id}")
        public ResponseEntity <PostDto> getPostById (@PathVariable (name = "id") long id) {

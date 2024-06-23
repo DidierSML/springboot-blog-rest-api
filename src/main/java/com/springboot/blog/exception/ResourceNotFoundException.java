@@ -13,13 +13,15 @@ public class ResourceNotFoundException extends RuntimeException{
 
     //Dinámicamente, se reemplazarán los valores como en el ejemplo:
     public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue) {
-        super(String.format("%s not found with %s : '%s'",resourceName,fieldName,fieldValue)); // (Post) not found with (id):(1)
+
+        // (Post) not Found with (id):(1)
+        super(String.format("%s not found with %s : '%s'",resourceName,fieldName,fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
     }
 
-    //los campos fueron inicializados en el constructor, entonces no necesitan (setter), solo (getter)
+    //Los campos fueron inicializados en el constructor, entonces no necesitan (setter), solo (getter)
 
     public String getResourceName() {
         return resourceName;

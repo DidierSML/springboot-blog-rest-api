@@ -12,7 +12,6 @@ import java.util.List;
 public class PostGeneralResponse {
 
     private List<PostResponseDto> content;
-
     private int pageNo;
     private int pageSize;
     private long totalElements;
