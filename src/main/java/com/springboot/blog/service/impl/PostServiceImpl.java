@@ -23,40 +23,45 @@ public class PostServiceImpl implements PostService {
 
 
     private final PostRepository postRepository;
-
     private final MapperPost mapperPost;
 
 
     @Override
     public PostResponseDto createPost(PostRequestDto postRequestDto) {
 
-        //convert - PostDto to Entity
+        //Convert - PostDto to Entity
         Post post = mapperPost.requestDtoToPost(postRequestDto);
 
+        //Saving the newPost object in DB
         Post newPost = postRepository.save(post);
 
-        //convert - Entity to PostDto
+        //Convert - Entity to PostDto and return as response
         return mapperPost.postToResponseDto(newPost);
 
     }
 
+    //Adding pageable to method -getAllPosts-
     @Override
-    public PostGeneralResponse getAllPosts(int pageNo, int pageSize, String sortBy, String sortDir) { //adding pageable
+    public PostGeneralResponse getAllPosts (int pageNo, int pageSize, String sortBy, String sortDir) {
 
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() //Conditional to establish sorting, asc or desc
+        //Condition to establish sorting, Ascending or Descending
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
 
-        // create Pageable instance
-        Pageable pageable = PageRequest.of(pageNo, pageSize, sort); //This method is provided by instructor and receive as parameter a String
+        //Creating a Pageable instance
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
 
+        //Creating an Instance of Page whose function is storage all the posts according -pageable- requirements
         Page <Post> posts = postRepository.findAll(pageable);
 
         // get content from page object
         // List <Post> listOfPosts = posts.getContent();
 
-        //List<PostRequestDto> content = listOfPosts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
+        /*
+            Java 8FM to convert -ListEntity(Post) in List(PostDto)
+            List<PostRequestDto> content = listOfPosts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
+        */
         List<PostResponseDto> content = mapperPost.postsToResponseDto(posts.getContent());
-        //Method of Java 8 that convert -ListEntity(Post) in List(PostDto)
 
         PostGeneralResponse postGeneralResponse = new PostGeneralResponse();
 
@@ -72,19 +77,21 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponseDto getPostById(long id) {
-        Post post = postRepository.findById(id).orElseThrow (()-> new ResourceNotFoundException ("Post", "id", id));
+    public PostResponseDto getPostById (long id) {
+        Post post = postRepository.findById(id).
+                orElseThrow (()-> new ResourceNotFoundException ("Post", "id", id));
 
-        //Post by id -> postResponseDto as id and Return of the last
         return mapperPost.MAPPER_POST.postToResponseDto(post);
     }
 
     @Override
     public PostResponseDto updatePost(PostRequestDto postRequestDto, long id) {
-        //first Browsing by id
-        Post existingPost = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
 
-        // Updating the fields of the existing (post) with the values of the (postRequestDto)
+        //Browsing Post by id
+        Post existingPost = postRepository.findById(id).
+                orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+
+        //Updating the fields of the existing (post) with the values of the (postRequestDto)
         existingPost.setTitle(postRequestDto.getTitle());
         existingPost.setDescription(postRequestDto.getDescription());
         existingPost.setContent(postRequestDto.getContent());
@@ -97,10 +104,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deletePostById(long id) { //public void ...
-        //first Browsing by id
-        Post post = postRepository.findById(id).orElseThrow (()-> new ResourceNotFoundException ("Post", "id", id));
-        //we proceed to delete id using Jpa Repository
+    public void deletePostById(long id) {
+
+        //Browsing By id
+        Post post = postRepository.findById(id).
+                orElseThrow (()-> new ResourceNotFoundException ("Post", "id", id));
+
         postRepository.delete(post);
     }
 
