@@ -15,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Pageable; //Importing add from Instructor
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -25,7 +27,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final MapperPost mapperPost;
 
-
+    @Transactional
     @Override
     public PostResponseDto createPost(PostRequestDto postRequestDto) {
 
@@ -84,6 +86,7 @@ public class PostServiceImpl implements PostService {
         return mapperPost.MAPPER_POST.postToResponseDto(post);
     }
 
+    @Transactional
     @Override
     public PostResponseDto updatePost(PostRequestDto postRequestDto, long id) {
 
