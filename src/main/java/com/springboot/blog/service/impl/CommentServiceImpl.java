@@ -13,6 +13,7 @@ import com.springboot.blog.service.CommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final MapperComment mapperComment;
 
-
+    @Transactional
     @Override //Logic for (create/save) Comment
     public CommentResponseDto createComment(long postId, CommentRequestDto commentRequestDto) {
 
@@ -78,6 +79,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     //Logic to update a Comment
+    @Transactional
     @Override
     public CommentResponseDto updateComment(long postId, long commentId, CommentRequestDto commentRequestDto) {
 
